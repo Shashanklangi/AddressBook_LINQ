@@ -45,5 +45,30 @@ namespace AddreeBookLINQ
                 Console.WriteLine();
             }
         }
+        public string EditContact()
+        {
+            string details = "";
+            AddContact();
+            var contacts = dataTable.AsEnumerable().Where(r => r.Field<string>("FirstName") == "Brandon");
+            int count = contacts.Count();
+            if (count > 0)
+            {
+                foreach (var contact in contacts)
+                {
+                    details += contact.Field<string>("FirstName");
+                    contact.SetField("LastName", "Dsouza");
+                    contact.SetField("City", "Mumbai");
+                    contact.SetField("State", "Maharashtra");
+                    contact.SetField("Zip", 400025);
+                }
+                Console.WriteLine("Contact is Updated");
+                DisplayContacts();
+            }
+            else
+            {
+                Console.WriteLine("Contact not Found.");
+            }
+            return details;
+        }
     }
 }
