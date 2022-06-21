@@ -115,5 +115,10 @@ namespace AddreeBookLINQ
                 Console.WriteLine("Contact not Found.");
             }
         }
+        public void CountContactByUsingCity()
+        {
+            var contacts = dataTable.Rows.Cast<DataRow>().GroupBy(r => r["City"].Equals("Miami")).Count();
+            Console.WriteLine("Size : {0} ", contacts);
+        }
     }
 }
